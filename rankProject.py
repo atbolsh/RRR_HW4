@@ -7,6 +7,9 @@ from numpy.linalg import inv
 
 import matplotlib.pyplot as plt
 
+def semiDefProject(X):
+   return (X + X.transpose())*0.5
+
 def rankProject(M, rank=1, unitary=True):
    l = np.shape(M)[0]
    vals, x = eig(M)
@@ -21,7 +24,7 @@ def rankProject(M, rank=1, unitary=True):
    else:
       s = np.maximum(s, 0) #Positive semi-definite   
    vals = s[rev_ind]
-   return x*np.matmul(np.identity(l), vals)*inv(x)
+   return np.matmul(x, np.matmul(np.identity(l)*vals, inv(x)))
 
 
    
