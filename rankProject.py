@@ -8,10 +8,11 @@ from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
 def semiDefProject(X):
-   return (X + X.transpose())*0.5
+   return np.real((X + X.transpose())*0.5)
 
-def rankProject(M, rank=1, unitary=True):
-   l = np.shape(M)[0]
+def rankProject(X, rank=1, unitary=True):
+   l = np.shape(X)[0]
+   M = semiDefProject(X)
    vals, x = eig(M)
    #Indeces for sorting
    ind = np.argsort(vals)
