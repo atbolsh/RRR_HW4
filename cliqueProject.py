@@ -54,4 +54,8 @@ def cliqueProject(A, k, H):
     return B
 
 
+def extractClique(A):
+    vals, vecs = eig(A)
+    i = np.argmax(vals)
+    return A[:, i]
 

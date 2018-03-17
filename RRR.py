@@ -20,9 +20,9 @@ def RRR(v, proj1, proj2, beta=0.5, cutoff = 0.0001, maxIter=10000, errors=True):
     if norm(error) > cutoff:
         print "Warning: maximum iterations exceeded, no convergence"
     if errors:
-        return v, trace, proj1(v)
+        return v, trace, proj2(v)
     else:
-        return v, proj1(v)
+        return v, proj2(v)
 
 
 
