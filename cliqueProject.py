@@ -54,8 +54,12 @@ def cliqueProject(A, k, H):
     return B
 
 
-def extractClique(A):
-    vals, vecs = eig(A)
-    i = np.argmax(vals)
-    return A[:, i]
+def extractClique(A, acc=8):
+    """Gets indices of clique from solution matrix"""
+    d = np.round(np.diagonal(A), acc)
+    r = []
+    for i in range(len(d)):
+        if d[i] > 0.1:
+            r.append(i)
+    return np.array(r)
 

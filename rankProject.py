@@ -10,10 +10,12 @@ import matplotlib.pyplot as plt
 def semiDefProject(X):
    return np.real((X + X.transpose())*0.5)
 
-def rankProject(X, rank=1, unitary=True):
+def rankProject(X, rank=1, unitary=True, sG = False):
    l = np.shape(X)[0]
    M = semiDefProject(X)
    vals, x = eig(M)
+   if sG:
+      x = np.sign(x)
    #Indeces for sorting
    ind = np.argsort(vals)
    #Indeces for reverse sorting
@@ -25,6 +27,10 @@ def rankProject(X, rank=1, unitary=True):
    else:
       s = np.maximum(s, 0) #Positive semi-definite   
    vals = s[rev_ind]
+   #Spin-glass specific constraint.
+#   print vals
+#   print x
+#   print inv(x)
    return np.matmul(x, np.matmul(np.identity(l)*vals, inv(x)))
 
 
